@@ -9,7 +9,7 @@ package bson
 import (
 	"time"
 
-	"github.com/wgliang/pgproxy/parser/dependency/bytes2"
+	"github.com/access-request-system/pgproxy/parser/dependency/bytes2"
 )
 
 // EncodeInterface bson encodes an interface{}. Elements

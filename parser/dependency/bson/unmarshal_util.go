@@ -11,7 +11,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/wgliang/pgproxy/parser/dependency/hack"
+	"github.com/access-request-system/pgproxy/parser/dependency/hack"
 )
 
 // VerifyObject verifies kind to make sure it's

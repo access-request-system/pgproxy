@@ -14,9 +14,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/wgliang/pgproxy/parser/dependency/bson"
-	"github.com/wgliang/pgproxy/parser/dependency/bytes2"
-	"github.com/wgliang/pgproxy/parser/dependency/hack"
+	"github.com/access-request-system/pgproxy/parser/dependency/bson"
+	"github.com/access-request-system/pgproxy/parser/dependency/bytes2"
+	"github.com/access-request-system/pgproxy/parser/dependency/hack"
 )
 
 var (
