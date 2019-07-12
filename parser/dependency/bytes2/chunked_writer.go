@@ -11,7 +11,7 @@ import (
 	"io"
 	"unicode/utf8"
 
-	"github.com/wgliang/pgproxy/parser/dependency/hack"
+	"github.com/access-request-system/pgproxy/parser/dependency/hack"
 )
 
 // ChunkedWriter has the same interface as bytes.Buffer's write functions.

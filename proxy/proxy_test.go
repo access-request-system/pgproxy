@@ -9,7 +9,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"github.com/wgliang/pgproxy/parser"
+	"github.com/access-request-system/pgproxy/parser"
 )
 
 var (

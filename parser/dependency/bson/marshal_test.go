@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/wgliang/pgproxy/parser/dependency/bytes2"
+	"github.com/access-request-system/pgproxy/parser/dependency/bytes2"
 )
 
 type String1 string

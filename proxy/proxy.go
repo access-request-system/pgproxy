@@ -15,7 +15,7 @@ import (
 	"net"
 
 	"github.com/golang/glog"
-	"github.com/wgliang/pgproxy/parser"
+	"github.com/access-request-system/pgproxy/parser"
 )
 
 var (

@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03f23214-5fc1-454b-8634-07db3d3c595b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pgproxy.conf" beforeDir="false" afterPath="$PROJECT_DIR$/pgproxy.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli.go" beforeDir="false" afterPath="$PROJECT_DIR$/cli/cli.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cmd.go" beforeDir="false" afterPath="$PROJECT_DIR$/cli/cmd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/package_example/package_example.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/package_example/package_example.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/ast.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/ast.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bson/bson_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bson/bson_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bson/custom_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bson/custom_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bson/marshal.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bson/marshal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bson/marshal_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bson/marshal_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bson/marshal_util.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bson/marshal_util.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bson/unmarshal_util.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bson/unmarshal_util.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/bytes2/chunked_writer.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/bytes2/chunked_writer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/dependency/sqltypes/sqltypes.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/dependency/sqltypes/sqltypes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/parsed_query.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/parsed_query.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/parsed_query_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/parsed_query_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/token.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proxy/proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/proxy/proxy.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proxy/proxy_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/proxy/proxy_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/pgproxy.conf">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -54,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parser/token.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+            <state relative-caret-position="300">
+              <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
               <folding>
                 <element signature="e#173#268#0" expanded="true" />
               </folding>
@@ -130,6 +148,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
@@ -195,7 +214,7 @@
     <entry file="file://$PROJECT_DIR$/pgproxy.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -223,8 +242,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/parser/token.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        <state relative-caret-position="300">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
           <folding>
             <element signature="e#173#268#0" expanded="true" />
           </folding>

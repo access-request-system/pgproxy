@@ -10,7 +10,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/wgliang/pgproxy/parser/dependency/sqltypes"
+	"github.com/access-request-system/pgproxy/parser/dependency/sqltypes"
 )
 
 type bindLocation struct {

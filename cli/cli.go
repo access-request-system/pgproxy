@@ -15,8 +15,8 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	"github.com/wgliang/pgproxy/parser"
-	"github.com/wgliang/pgproxy/proxy"
+	"github.com/access-request-system/pgproxy/parser"
+	"github.com/access-request-system/pgproxy/proxy"
 )
 
 var (
