@@ -7,15 +7,10 @@
 package proxy
 
 import (
-	// "bytes"
-	// "encoding/binary"
-	"errors"
 	"fmt"
 	"io"
 	"net"
-
 	"github.com/golang/glog"
-	"github.com/access-request-system/pgproxy/parser"
 )
 
 var (
@@ -25,10 +20,11 @@ var (
 // Start proxy server needed receive  and proxyHost, all
 // the request or database's sql of receive will redirect
 // to remoteHost.
-func Start(proxyHost, remoteHost string, filterCallback, returnCallBack parser.Callback) {
+func Start(proxyHost, remoteHost string) {
 	defer glog.Flush()
 	glog.Infof("Proxying from %v to %v\n", proxyHost, remoteHost)
 
+	fmt.Printf("Proxying from %v to %v\n", proxyHost, remoteHost)
 	proxyAddr := getResolvedAddresses(proxyHost)
 	remoteAddr := getResolvedAddresses(remoteHost)
 	listener := getListener(proxyAddr)
@@ -40,7 +36,7 @@ func Start(proxyHost, remoteHost string, filterCallback, returnCallBack parser.C
 			continue
 		}
 		connid++
-
+		fmt.Printf("Coon_id  - %v \n", connid)
 		p := &Proxy{
 			lconn:  conn,
 			laddr:  proxyAddr,
@@ -50,7 +46,7 @@ func Start(proxyHost, remoteHost string, filterCallback, returnCallBack parser.C
 			prefix: fmt.Sprintf("Connection #%03d ", connid),
 			connId: connid,
 		}
-		go p.service(filterCallback, returnCallBack)
+		go p.service()
 	}
 }
 
@@ -111,9 +107,11 @@ func (p *Proxy) err(s string, err error) {
 }
 
 // Proxy.service open connection to remote and service proxying data.
-func (p *Proxy) service(filterCallback, returnCallBack parser.Callback) {
+func (p *Proxy) service() {
+	fmt.Print("p Service \n")
 	defer p.lconn.Close()
 	// connect to remote server
+
 	rconn, err := net.DialTCP("tcp", nil, p.raddr)
 	if err != nil {
 		p.err("Remote connection failed: %s", err)
@@ -122,24 +120,26 @@ func (p *Proxy) service(filterCallback, returnCallBack parser.Callback) {
 	p.rconn = rconn
 	defer p.rconn.Close()
 	// proxying data
-	go p.handleIncomingConnection(p.lconn, p.rconn, filterCallback)
-	go p.handleResponseConnection(p.rconn, p.lconn, returnCallBack)
+	go p.handleIncomingConnection(p.lconn, p.rconn)
+	go p.handleResponseConnection(p.rconn, p.lconn)
 	// wait for close...
 	<-p.errsig
 }
 
 // Proxy.handleIncomingConnection
-func (p *Proxy) handleIncomingConnection(src, dst *net.TCPConn, Callback parser.Callback) {
+func (p *Proxy) handleIncomingConnection(src, dst *net.TCPConn) {
 	// directional copy (64k buffer)
 	buff := make([]byte, 0xffff)
-
+	fmt.Print("p handleIncomingConnection \n")
 	for {
 		n, err := src.Read(buff)
 		if err != nil {
 			p.err("Read failed '%s'\n", err)
 			return
 		}
-		b, err := getModifiedBuffer(buff[:n], Callback)
+		//raw Data...
+		//fmt.Printf("Statement - %s \n", string(buff[:n])[5:])
+		b, err := getModifiedBuffer(buff[:n])
 		if err != nil {
 			p.err("%s\n", err)
 			err = dst.Close()
@@ -158,8 +158,9 @@ func (p *Proxy) handleIncomingConnection(src, dst *net.TCPConn, Callback parser.
 }
 
 // Proxy.handleResponseConnection
-func (p *Proxy) handleResponseConnection(src, dst *net.TCPConn, Callback parser.Callback) {
+func (p *Proxy) handleResponseConnection(src, dst *net.TCPConn) {
 	// directional copy (64k buffer)
+	fmt.Print("p handleResponseConnection \n")
 	buff := make([]byte, 0xffff)
 
 	for {
@@ -168,9 +169,9 @@ func (p *Proxy) handleResponseConnection(src, dst *net.TCPConn, Callback parser.
 			p.err("Read failed '%s'\n", err)
 			return
 		}
-		b := setResponseBuffer(p.erred, buff[:n], Callback)
+		//b := setResponseBuffer(p.erred, buff[:n], Callback)
 
-		n, err = dst.Write(b)
+		n, err = dst.Write(buff[:n])
 		if err != nil {
 			p.err("Write failed '%s'\n", err)
 			return
@@ -179,23 +180,41 @@ func (p *Proxy) handleResponseConnection(src, dst *net.TCPConn, Callback parser.
 }
 
 // ModifiedBuffer when is local and will call filterCallback function
-func getModifiedBuffer(buffer []byte, filterCallback parser.Callback) (b []byte, err error) {
-	if len(buffer) > 0 && string(buffer[0]) == "Q" {
-		if !filterCallback(buffer) {
-			return nil, errors.New(fmt.Sprintf("Do not meet the rules of the sql statement %s", string(buffer[1:])))
-		}
+func getModifiedBuffer(buffer []byte) (b []byte, err error) {
+	fmt.Print("f getModifiedBuffer \n")
+
+	if len(buffer) > 0 && string(buffer[0]) == "T" {
+		fmt.Print("f getModifiedBuffer - Connect string:  ")
+		fmt.Printf("%s \n", string(buffer)[5:])
 	}
+	if len(buffer) > 0 && string(buffer[3]) == "P" {
+		fmt.Print("f getModifiedBuffer - Connect string:  ")
+		fmt.Printf("%s \n", string(buffer)[5:])
+	}
+	if len(buffer) > 0 && string(buffer[0]) == "p" {
+		fmt.Print("f getModifiedBuffer - password: ")
+		fmt.Printf("%s \n", string(buffer)[5:])
+	}
+
+	if len(buffer) > 0 && string(buffer[0]) == "Q" {
+		fmt.Printf("Statement: %s \n", string(buffer)[5:])
+		//if !filterCallback(buffer) {
+			//return nil, errors.New(fmt.Sprintf("Do not meet the rules of the sql statement %s", string(buffer[1:])))
+			//fmt.Print("f getModifiedBuffer - second true \n")
+			//} else {
+			//fmt.Print("f getModifiedBuffer - second false \n")
+		}
+	//} else {
+		//fmt.Print("f getModifiedBuffer - first false \n")
+	//}
 
 	return buffer, nil
 }
 
 // ResponseBuffer when is local and will call returnCallback function
-func setResponseBuffer(iserr bool, buffer []byte, filterCallback parser.Callback) (b []byte) {
-	if len(buffer) > 0 && string(buffer[0]) == "Q" {
-		if !filterCallback(buffer) {
-			return nil
-		}
-	}
+func setResponseBuffer(iserr bool, buffer []byte) (b []byte) {
+	fmt.Print("f setResponseBuffer \n")
+
 
 	return buffer
 }

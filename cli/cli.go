@@ -15,7 +15,6 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	"github.com/access-request-system/pgproxy/parser"
 	"github.com/access-request-system/pgproxy/proxy"
 )
 
@@ -51,10 +50,8 @@ func Main(config interface{}, pargs interface{}) {
 			info(pc.ServerConfig.ProxyAddr)
 			logDir()
 			saveCurrentPid()
-			proxy.Start(pc.ServerConfig.ProxyAddr, pc.DB["master"].Addr, parser.Filter, parser.Return)
+			proxy.Start(pc.ServerConfig.ProxyAddr, pc.DB["master"].Addr)
 			glog.Infoln("Started pgproxy successfully.")
-		} else if args[1] == "cli" {
-			Command()
 		} else if args[1] == "stop" {
 			stop()
 		} else {
