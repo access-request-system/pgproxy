@@ -11,6 +11,7 @@ import (
 	"io"
 	"net"
 	"github.com/golang/glog"
+	"github.com/access-request-system/kiwi/kiwi"
 )
 
 var (
@@ -183,7 +184,7 @@ func (p *Proxy) handleResponseConnection(src, dst *net.TCPConn) {
 func getModifiedBuffer(buffer []byte) (b []byte, err error) {
 	fmt.Print("f getModifiedBuffer \n")
 
-	if len(buffer) > 0 && string(buffer[0]) == "T" {
+	/*if len(buffer) > 0 && string(buffer[0]) == "T" {
 		fmt.Print("f getModifiedBuffer - Connect string:  ")
 		fmt.Printf("%s \n", string(buffer)[5:])
 	}
@@ -194,7 +195,7 @@ func getModifiedBuffer(buffer []byte) (b []byte, err error) {
 	if len(buffer) > 0 && string(buffer[0]) == "p" {
 		fmt.Print("f getModifiedBuffer - password: ")
 		fmt.Printf("%s \n", string(buffer)[5:])
-	}
+	}*/
 
 	if len(buffer) > 0 && string(buffer[0]) == "Q" {
 		fmt.Printf("Statement: %s \n", string(buffer)[5:])
