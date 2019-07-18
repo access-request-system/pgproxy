@@ -100,11 +100,17 @@ type kiwi_header struct {
     len uint32
 }
 
-func mapkey(m map[string]byte, value byte) (key string, ok bool) {
+
+func read_packet_header(buf []byte) (k_header kiwi_header){
+	k_header.h_type = buf[0]
+
+	return
+}
+
+func mapkey(m map[string]byte, value byte) (key string) {
 	for k, v := range m {
 		if v == value {
 			key = k
-			ok = true
 			return
 		}
 	}
@@ -114,3 +120,36 @@ func mapkey(m map[string]byte, value byte) (key string, ok bool) {
 	return
 }
 
+func mapkey_desc(m map[string]string, value string) (key string) {
+	for k, v := range m {
+		if v == value {
+			key = k
+			return
+		}
+	}
+	if len(key) == 0 {
+		key = "Unknown"
+	}
+	return
+}
+
+
+func Mapkey_kiwi_be_type (v byte) (key string) {
+	key = mapkey(kiwi_be_type, v)
+	return
+}
+
+func Mapkey_kiwi_fe_type (v byte) (key string) {
+	key = mapkey(kiwi_fe_type, v)
+	return
+}
+
+func Mapkey_kiwi_be_type_desc (v string) (key string) {
+	key = mapkey_desc(kiwi_be_type_desc, v)
+	return
+}
+
+func Mapkey_kiwi_fe_type_desc (v string) (key string) {
+	key = mapkey_desc(kiwi_fe_type_desc, v)
+	return
+}

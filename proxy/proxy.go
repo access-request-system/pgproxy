@@ -9,15 +9,19 @@ package proxy
 import (
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"github.com/golang/glog"
-	"github.com/access-request-system/kiwi/kiwi"
+	"github.com/access-request-system/pgproxy/kiwi"
 )
 
 var (
 	connid = uint64(0) // Self-increasing ConnectID.
 )
 
+
+var _ = kiwi.Mapkey_kiwi_fe_type('Q')
+var _ = log.Printf
 // Start proxy server needed receive  and proxyHost, all
 // the request or database's sql of receive will redirect
 // to remoteHost.
